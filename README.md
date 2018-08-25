@@ -1,3 +1,3 @@
-# betgalgo
+# Bet Galgo
 
-PROJETO RESPONSAVEL PELA APOSENTADORIA DOS PARTICIPANTES
+Projeto responsavel pela aposentadoria dos participantes!
