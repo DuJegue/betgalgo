@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Corridas</title>
+</head>
+<body>
+<h2>Lista de Corridas</h2>
+
+
+	<div th:unless="${#lists.isEmpty(races)}">
+        <dl th:each="race : ${races}">
+        	  <dt class="bookHeadline">
+        	  		<span th:text="${race.grade}"></span>
+              		<span th:text="${race.distance}"></span>m
+              		UK(<span th:text="${race.dateHoraUK}"></span>) -
+              		BR(<span th:text="${race.dateHoraBR}"></span>)
+			  	<a href="races" th:id="${race.id}"
+              		  th:href="@{'https://www....../api/races/' + ${race.id}}"><span th:text="${race.id}">teste</span></a>
+			  </dt>
+        </dl>
+      </div>
+</body>
+</html>
