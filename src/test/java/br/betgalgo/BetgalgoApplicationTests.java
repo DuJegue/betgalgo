@@ -3,7 +3,6 @@ package br.betgalgo;
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.junit.Assert.assertThat;
 
-import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -27,6 +26,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import br.betgalgo.commons.pojo.Analysis;
+import br.betgalgo.commons.pojo.Analysis2;
 import br.betgalgo.commons.pojo.Dog1;
 import br.betgalgo.commons.pojo.Dog2;
 import br.betgalgo.commons.pojo.Dog3;
@@ -35,6 +36,10 @@ import br.betgalgo.commons.pojo.Dog5;
 import br.betgalgo.commons.pojo.Dog6;
 import br.betgalgo.commons.pojo.Race;
 import br.betgalgo.commons.pojo.RaceDetalhe;
+import br.betgalgo.commons.util.Analysis2Adapter;
+import br.betgalgo.commons.util.AnalysisAdapter;
+import br.betgalgo.commons.util.IntegerCustom;
+import br.betgalgo.commons.util.IntegerCustomTypeAdapter;
 
 @RunWith(SpringRunner.class)
 @TestPropertySource(locations = "classpath:user.properties")
@@ -55,7 +60,11 @@ public class BetgalgoApplicationTests {
 
 		mapRace = new HashMap<>();
 
-		gson = new GsonBuilder().setPrettyPrinting().create();
+		gson = new GsonBuilder().registerTypeAdapter(Analysis.class, new AnalysisAdapter())
+		         				.registerTypeAdapter(Analysis2.class, new Analysis2Adapter())
+		         				.registerTypeAdapter(IntegerCustom.class, new IntegerCustomTypeAdapter())
+		         				.setPrettyPrinting()
+		         				.create();
 
 		driver = new ChromeDriver();
 
@@ -91,22 +100,18 @@ public class BetgalgoApplicationTests {
 			driver.get(siteRace + raceId);
 			
 			try {
-				//driver.manage().timeouts().wait(10000);
+			
 				Thread.sleep(7000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
 			
-			String json = driver.findElement(By.tagName("body")).getText();
+				String json = driver.findElement(By.tagName("body")).getText();
 
-			Race race = gson.fromJson(json, Race.class);
+				Race race = gson.fromJson(json, Race.class);
 
-			mapRace.put(raceId, race);
-			
-	        try {
+				mapRace.put(raceId, race);
+	        
 	            Files.write(Paths.get(raceId + ".json"), json.getBytes());
-	        } catch (IOException e) {
+
+			} catch (Exception e) {
 	            e.printStackTrace();
 	        }
 		}
