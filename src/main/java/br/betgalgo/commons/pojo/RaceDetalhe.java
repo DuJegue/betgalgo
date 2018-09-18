@@ -51,14 +51,6 @@ public class RaceDetalhe implements Serializable {
 	@Expose
 	private String secondTitle;
 
-	@SerializedName("next_button")
-	@Expose
-	private Integer nextButton;
-
-	@SerializedName("previous_button")
-	@Expose
-	private String previousButton;
-
 	@SerializedName("dogs")
 	@Expose
 	@Valid
@@ -85,14 +77,12 @@ public class RaceDetalhe implements Serializable {
 	 * @param raceId
 	 * @param previousButton
 	 * @param full
-	 * @param nextButton
 	 * @param fifthTitle
 	 * @param seventhTitle
 	 * @param comments
 	 */
 	public RaceDetalhe(Boolean full, Integer raceId, String wheater, String comments, String thirdTitle, String fourthTitle,
-			String fifthTitle, String sixthTitle, String seventhTitle, String firstTitle, String secondTitle,
-			Integer nextButton, String previousButton, Dogs dogs) {
+			String fifthTitle, String sixthTitle, String seventhTitle, String firstTitle, String secondTitle, Dogs dogs) {
 		super();
 		this.full = full;
 		this.raceId = raceId;
@@ -105,8 +95,6 @@ public class RaceDetalhe implements Serializable {
 		this.seventhTitle = seventhTitle;
 		this.firstTitle = firstTitle;
 		this.secondTitle = secondTitle;
-		this.nextButton = nextButton;
-		this.previousButton = previousButton;
 		this.dogs = dogs;
 	}
 
@@ -250,32 +238,6 @@ public class RaceDetalhe implements Serializable {
 
 	public RaceDetalhe withSecondTitle(String secondTitle) {
 		this.secondTitle = secondTitle;
-		return this;
-	}
-
-	public Integer getNextButton() {
-		return nextButton;
-	}
-
-	public void setNextButton(Integer nextButton) {
-		this.nextButton = nextButton;
-	}
-
-	public RaceDetalhe withNextButton(Integer nextButton) {
-		this.nextButton = nextButton;
-		return this;
-	}
-
-	public String getPreviousButton() {
-		return previousButton;
-	}
-
-	public void setPreviousButton(String previousButton) {
-		this.previousButton = previousButton;
-	}
-
-	public RaceDetalhe withPreviousButton(String previousButton) {
-		this.previousButton = previousButton;
 		return this;
 	}
 

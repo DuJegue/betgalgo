@@ -23,10 +23,6 @@ public class Datum implements Serializable, Comparable<Datum> {
 	@Expose
 	private Integer stadiumId;
 	
-	@SerializedName("free")
-	@Expose
-	private Integer free;
-	
 	@SerializedName("lay_list")
 	@Expose
 	private Integer layList;
@@ -71,12 +67,11 @@ public class Datum implements Serializable, Comparable<Datum> {
 	 * @param grade
 	 * @param date
 	 */
-	public Datum(Integer id, Integer stadiumId, Integer free, Integer layList, String grade, String date,
+	public Datum(Integer id, Integer stadiumId, Integer layList, String grade, String date,
 			Integer distance, String createdAt, String updatedAt, Object deletedAt) {
 		super();
 		this.id = id;
 		this.stadiumId = stadiumId;
-		this.free = free;
 		this.layList = layList;
 		this.grade = grade;
 		this.date = date;
@@ -111,20 +106,6 @@ public class Datum implements Serializable, Comparable<Datum> {
 		this.stadiumId = stadiumId;
 		return this;
 	}
-
-	public Integer getFree() {
-		return free;
-	}
-
-	public void setFree(Integer free) {
-		this.free = free;
-	}
-
-	public Datum withFree(Integer free) {
-		this.free = free;
-		return this;
-	}
-
 	public Integer getLayList() {
 		return layList;
 	}
@@ -251,7 +232,7 @@ public class Datum implements Serializable, Comparable<Datum> {
 
 	@Override
 	public String toString() {
-		return "Datum [id=" + id + ", stadiumId=" + stadiumId + ", free=" + free + ", layList=" + layList + ", grade="
+		return "Datum [id=" + id + ", stadiumId=" + stadiumId + ", layList=" + layList + ", grade="
 				+ grade + ", date=" + date + ", distance=" + distance + ", createdAt=" + createdAt + ", updatedAt="
 				+ updatedAt + ", deletedAt=" + deletedAt + "]";
 	}
