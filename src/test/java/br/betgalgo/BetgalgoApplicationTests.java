@@ -117,7 +117,8 @@ public class BetgalgoApplicationTests {
 		}
 
 		String teste = (String) mapRace.values().toArray()[0];
-
+		List<String> selecionados = new ArrayList<>();
+		
 		for (Race rc : mapRace.values()) {
 
 			RaceDetalhe raceDetalhe = rc.getRaceDetalhe();
@@ -127,7 +128,8 @@ public class BetgalgoApplicationTests {
 			Dog4 dog4 = raceDetalhe.getDogs().getDog4();
 			Dog5 dog5 = raceDetalhe.getDogs().getDog5();
 			Dog6 dog6 = raceDetalhe.getDogs().getDog6();
-
+            
+			/*
 			System.out.println("--------------Details-----------------------");
 			System.out.println("FirstTitle: " + raceDetalhe.getFirstTitle());
 			System.out.println("SecondTitle: " + raceDetalhe.getSecondTitle());
@@ -139,9 +141,31 @@ public class BetgalgoApplicationTests {
 			System.out.println("Dog 5: " + dog5.getName() + " Chance: " + dog5.getChanceOfWin());
 			System.out.println("Dog 6: " + dog6.getName() + " Chance: " + dog6.getChanceOfWin());
 			System.out.println("--------------------------------------------------");
-
+		    */
+			if (dog1!=null && dog2!=null && dog3!=null && dog4!=null && dog5!=null && dog6!=null &&
+				dog1.getAnalysis()!=null &&	dog2.getAnalysis()!=null &&	dog3.getAnalysis()!=null &&	
+				dog4.getAnalysis()!=null &&	dog5.getAnalysis()!=null &&	dog6.getAnalysis()!=null) {
+				
+				if (dog1.getAnalysis().getPreview()!=null && dog1.getAnalysis().getPreview().equals(6)) {
+					selecionados.add(dog1.getName());
+				} else if (dog2.getAnalysis().getPreview()!=null && dog2.getAnalysis().getPreview().equals(6)) {
+					selecionados.add(dog2.getName()); 
+				} else if (dog3.getAnalysis().getPreview()!=null && dog3.getAnalysis().getPreview().equals(6)) {
+					selecionados.add(dog3.getName()); 
+				} else if (dog4.getAnalysis().getPreview()!=null && dog4.getAnalysis().getPreview().equals(6)) {
+					selecionados.add(dog4.getName()); 
+				} else if (dog5.getAnalysis().getPreview()!=null && dog5.getAnalysis().getPreview().equals(6)) {
+					selecionados.add(dog5.getName()); 
+				} else if (dog6.getAnalysis().getPreview()!=null && dog6.getAnalysis().getPreview().equals(6)) {
+					selecionados.add(dog6.getName()); 
+				}
+			}
 		}
-
+		
+		System.out.println("------------------------------------");
+		System.out.println("Total corridas: " + mapRace.size());
+		System.out.println("Selecionados: " + selecionados.size());
+		
 		assertThat(teste, containsString("success"));
 	}
 }
