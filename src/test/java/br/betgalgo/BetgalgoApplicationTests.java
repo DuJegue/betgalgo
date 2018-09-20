@@ -101,7 +101,7 @@ public class BetgalgoApplicationTests {
 			
 			try {
 			
-				Thread.sleep(7000);
+				Thread.sleep(3000);
 			
 				String json = driver.findElement(By.tagName("body")).getText();
 
@@ -109,14 +109,13 @@ public class BetgalgoApplicationTests {
 
 				mapRace.put(raceId, race);
 	        
-	            Files.write(Paths.get(raceId + ".json"), json.getBytes());
+	            //Files.write(Paths.get(raceId + ".json"), json.getBytes());
 
 			} catch (Exception e) {
 	            e.printStackTrace();
 	        }
 		}
 
-		String teste = (String) mapRace.values().toArray()[0];
 		List<String> selecionados = new ArrayList<>();
 		
 		for (Race rc : mapRace.values()) {
@@ -161,11 +160,14 @@ public class BetgalgoApplicationTests {
 				}
 			}
 		}
-		
+		System.out.println("------------------------------------");
+		for (String str : selecionados) {
+			System.out.println(str);
+		}
 		System.out.println("------------------------------------");
 		System.out.println("Total corridas: " + mapRace.size());
 		System.out.println("Selecionados: " + selecionados.size());
 		
-		assertThat(teste, containsString("success"));
+		assertThat("success", containsString("success"));
 	}
 }

@@ -5,20 +5,43 @@
 <title>Corridas</title>
 </head>
 <body>
-<h2>Lista de Corridas</h2>
+	<h2>Lista de Corridas</h2>
 
 
 	<div th:unless="${#lists.isEmpty(races)}">
-        <dl th:each="race : ${races}">
-        	  <dt class="bookHeadline">
-        	  		<span th:text="${race.grade}"></span>
-              		<span th:text="${race.distance}"></span>m
-              		UK(<span th:text="${race.dateHoraUK}"></span>) -
-              		BR(<span th:text="${race.dateHoraBR}"></span>)
-			  	<a href="races" th:id="${race.id}"
-              		  th:href="@{'https://www....../api/races/' + ${race.id}}"><span th:text="${race.id}">teste</span></a>
-			  </dt>
-        </dl>
-      </div>
+		<dl th:each="race : ${races}" th:object="${race.raceDetalhe}" >
+			<dt class="bookHeadline">
+				<span th:text="*{raceId}"></span> - 
+				<span th:text="*{firstTitle}"></span> 
+				<span th:text="*{secondTitle}"></span>
+	        </dt>
+			<dt>
+			 	<dd>
+					<span th:text="*{dogs.dog1?.name}"></span> 
+					<span th:text="*{dogs.dog1?.chanceOfWin}"></span>
+				</dd>
+				<dd>
+					<span th:text="*{dogs.dog2?.name}"></span> 
+					<span th:text="*{dogs.dog2?.chanceOfWin}"></span>
+				</dd>
+				<dd>
+					<span th:text="*{dogs.dog3?.name}"></span> 
+					<span th:text="*{dogs.dog3?.chanceOfWin}"></span>
+				</dd>
+				<dd>
+					<span th:text="*{dogs.dog4?.name}"></span> 
+					<span th:text="*{dogs.dog4?.chanceOfWin}"></span>
+				</dd>
+				<dd>
+					<span th:text="*{dogs.dog5?.name}"></span> 
+					<span th:text="*{dogs.dog5?.chanceOfWin}"></span>
+				</dd>
+				<dd>
+					<span th:text="*{dogs.dog6?.name}"></span> 
+					<span th:text="*{dogs.dog6?.chanceOfWin}"></span>
+				</dd>
+			</dt>	
+		</dl>
+	</div>
 </body>
 </html>
