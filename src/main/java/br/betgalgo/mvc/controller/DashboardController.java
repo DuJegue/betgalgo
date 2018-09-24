@@ -98,8 +98,9 @@ public class DashboardController {
 					dogAb.getAnalysis().getOverall().intValue() < limitOverall && 
 					dogAb.getChanceOfWin() != null && 
 					dogAb.getChanceOfWin().intValue() < limitChanceOfWin) {
-					//selecionados.add(rc.getRaceDetalhe().getFirstTitle().concat(" - ").concat(dogAb.getName()));
-					selecionados.add(dogAb.getName());
+					selecionados.add(rc.getRaceDetalhe().getFirstTitle().concat(" - ").concat(dogAb.getName()));
+					//selecionados.add(dogAb.getName());
+					break;
 				}
 
 			}
