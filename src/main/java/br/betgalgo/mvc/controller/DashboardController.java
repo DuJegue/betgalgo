@@ -21,7 +21,9 @@ import com.google.gson.GsonBuilder;
 
 import br.betgalgo.commons.pojo.Analysis;
 import br.betgalgo.commons.pojo.Analysis2;
+import br.betgalgo.commons.pojo.DogAb;
 import br.betgalgo.commons.pojo.Race;
+import br.betgalgo.commons.pojo.RaceDetalhe;
 import br.betgalgo.commons.util.Analysis2Adapter;
 import br.betgalgo.commons.util.AnalysisAdapter;
 import br.betgalgo.commons.util.IntegerCustom;
@@ -45,8 +47,7 @@ public class DashboardController {
 
 		try {
 
-			Stream<Path> listFile = Files.list(Paths.get("."))
-								    .filter(f -> f.getFileName().toString().endsWith(".json"));
+			Stream<Path> listFile = Files.list(Paths.get(".")).filter(f -> f.getFileName().toString().endsWith(".json"));
 
 			List<Race> listRace = new ArrayList<>();
 
@@ -56,12 +57,60 @@ public class DashboardController {
 			}
 
 			model.addAttribute("races", listRace);
-			
+
+			applyRules(listRace);
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
 		return "dashboard";
+	}
+
+	public void applyRules(List<Race> listRace) {
+
+		List<String> selecionados = new ArrayList<>();
+		List<DogAb> listDogs;
+
+		int preview = 5;
+		int preview2 = 6;
+		int limitOverall = 20;
+		int limitChanceOfWin = 12;
+
+		for (Race rc : listRace) {
+
+			RaceDetalhe raceDetalhe = rc.getRaceDetalhe();
+			listDogs = new ArrayList<>();
+			//listDogs.add(raceDetalhe.getDogs().getDog1());
+			listDogs.add(raceDetalhe.getDogs().getDog2());
+			listDogs.add(raceDetalhe.getDogs().getDog3());
+			listDogs.add(raceDetalhe.getDogs().getDog4());
+			listDogs.add(raceDetalhe.getDogs().getDog5());
+			listDogs.add(raceDetalhe.getDogs().getDog6());
+
+			for (DogAb dogAb : listDogs) {
+
+				if (dogAb != null && 
+					dogAb.getAnalysis() != null && 
+					dogAb.getAnalysis().getPreview() != null && 
+					(dogAb.getAnalysis().getPreview().equals(preview) || dogAb.getAnalysis().getPreview().equals(preview2)) && 
+					dogAb.getAnalysis().getOverall() != null && 
+					dogAb.getAnalysis().getOverall().intValue() < limitOverall && 
+					dogAb.getChanceOfWin() != null && 
+					dogAb.getChanceOfWin().intValue() < limitChanceOfWin) {
+					//selecionados.add(rc.getRaceDetalhe().getFirstTitle().concat(" - ").concat(dogAb.getName()));
+					selecionados.add(dogAb.getName());
+				}
+
+			}
+		}
+		System.out.println("------------------------------------");
+		for (String str : selecionados) {
+			System.out.println(str);
+		}
+		System.out.println("------------------------------------");
+		System.out.println("Total corridas: " + listRace.size());
+		System.out.println("Selecionados: " + selecionados.size());
 	}
 
 }

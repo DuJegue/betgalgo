@@ -28,14 +28,7 @@ import com.google.gson.GsonBuilder;
 
 import br.betgalgo.commons.pojo.Analysis;
 import br.betgalgo.commons.pojo.Analysis2;
-import br.betgalgo.commons.pojo.Dog1;
-import br.betgalgo.commons.pojo.Dog2;
-import br.betgalgo.commons.pojo.Dog3;
-import br.betgalgo.commons.pojo.Dog4;
-import br.betgalgo.commons.pojo.Dog5;
-import br.betgalgo.commons.pojo.Dog6;
 import br.betgalgo.commons.pojo.Race;
-import br.betgalgo.commons.pojo.RaceDetalhe;
 import br.betgalgo.commons.util.Analysis2Adapter;
 import br.betgalgo.commons.util.AnalysisAdapter;
 import br.betgalgo.commons.util.IntegerCustom;
@@ -109,64 +102,12 @@ public class BetgalgoApplicationTests {
 
 				mapRace.put(raceId, race);
 	        
-	            //Files.write(Paths.get(raceId + ".json"), json.getBytes());
+	            Files.write(Paths.get(raceId + ".json"), json.getBytes());
 
 			} catch (Exception e) {
 	            e.printStackTrace();
 	        }
 		}
-
-		List<String> selecionados = new ArrayList<>();
-		
-		for (Race rc : mapRace.values()) {
-
-			RaceDetalhe raceDetalhe = rc.getRaceDetalhe();
-			Dog1 dog1 = raceDetalhe.getDogs().getDog1();
-			Dog2 dog2 = raceDetalhe.getDogs().getDog2();
-			Dog3 dog3 = raceDetalhe.getDogs().getDog3();
-			Dog4 dog4 = raceDetalhe.getDogs().getDog4();
-			Dog5 dog5 = raceDetalhe.getDogs().getDog5();
-			Dog6 dog6 = raceDetalhe.getDogs().getDog6();
-            
-			/*
-			System.out.println("--------------Details-----------------------");
-			System.out.println("FirstTitle: " + raceDetalhe.getFirstTitle());
-			System.out.println("SecondTitle: " + raceDetalhe.getSecondTitle());
-			System.out.println("-----------------------Dogs-----------------------");
-			System.out.println("Dog 1: " + dog1.getName() + " Chance: " + dog1.getChanceOfWin());
-			System.out.println("Dog 2: " + dog2.getName() + " Chance: " + dog2.getChanceOfWin());
-			System.out.println("Dog 3: " + dog3.getName() + " Chance: " + dog3.getChanceOfWin());
-			System.out.println("Dog 4: " + dog4.getName() + " Chance: " + dog4.getChanceOfWin());
-			System.out.println("Dog 5: " + dog5.getName() + " Chance: " + dog5.getChanceOfWin());
-			System.out.println("Dog 6: " + dog6.getName() + " Chance: " + dog6.getChanceOfWin());
-			System.out.println("--------------------------------------------------");
-		    */
-			if (dog1!=null && dog2!=null && dog3!=null && dog4!=null && dog5!=null && dog6!=null &&
-				dog1.getAnalysis()!=null &&	dog2.getAnalysis()!=null &&	dog3.getAnalysis()!=null &&	
-				dog4.getAnalysis()!=null &&	dog5.getAnalysis()!=null &&	dog6.getAnalysis()!=null) {
-				
-				if (dog1.getAnalysis().getPreview()!=null && dog1.getAnalysis().getPreview().equals(6)) {
-					selecionados.add(dog1.getName());
-				} else if (dog2.getAnalysis().getPreview()!=null && dog2.getAnalysis().getPreview().equals(6)) {
-					selecionados.add(dog2.getName()); 
-				} else if (dog3.getAnalysis().getPreview()!=null && dog3.getAnalysis().getPreview().equals(6)) {
-					selecionados.add(dog3.getName()); 
-				} else if (dog4.getAnalysis().getPreview()!=null && dog4.getAnalysis().getPreview().equals(6)) {
-					selecionados.add(dog4.getName()); 
-				} else if (dog5.getAnalysis().getPreview()!=null && dog5.getAnalysis().getPreview().equals(6)) {
-					selecionados.add(dog5.getName()); 
-				} else if (dog6.getAnalysis().getPreview()!=null && dog6.getAnalysis().getPreview().equals(6)) {
-					selecionados.add(dog6.getName()); 
-				}
-			}
-		}
-		System.out.println("------------------------------------");
-		for (String str : selecionados) {
-			System.out.println(str);
-		}
-		System.out.println("------------------------------------");
-		System.out.println("Total corridas: " + mapRace.size());
-		System.out.println("Selecionados: " + selecionados.size());
 		
 		assertThat("success", containsString("success"));
 	}
