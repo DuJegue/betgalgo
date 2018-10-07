@@ -94,7 +94,7 @@ public class BetgalgoApplicationTests {
 			
 			try {
 			
-				Thread.sleep(3000);
+				Thread.sleep(2000);
 			
 				String json = driver.findElement(By.tagName("body")).getText();
 
