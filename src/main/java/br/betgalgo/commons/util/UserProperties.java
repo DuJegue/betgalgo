@@ -8,40 +8,43 @@ import org.springframework.stereotype.Component;
 @PropertySource("classpath:user.properties")
 public class UserProperties {
 
-	@Value("${user}")
+	@Value("${site.user}")
 	private String user;
 
-	@Value("${pass}")
+	@Value("${site.pass}")
 	private String pass;
 	
-	@Value("${site-login}")
+	@Value("${site.login}")
 	private String siteLogin;
 	
-	@Value("${site-race}")
+	@Value("${site.race}")
 	private String siteRace;
 	
-	@Value("${final-directory}")
+	@Value("${directory.final}")
 	private String finalDirectory;
 	
-	@Value("${preview}")
+	@Value("${directory.json}")
+	private String jsonDirectory;
+	
+	@Value("${result.preview}")
 	private int preview;
 	
-	@Value("${preview2}")
+	@Value("${result.preview2}")
 	private int preview2;
 	
-	@Value("${limitOverall}")
+	@Value("${limit.overall}")
 	private int limitOverall;
 	
-	@Value("${limitChanceOfWin}")
+	@Value("${limit.chanceOfWin}")
 	private int limitChanceOfWin;
 	
-	@Value("${limitHour}")
+	@Value("${limit.hour}")
 	private int limitHour;
 	
-	@Value("${limitMinute}")
+	@Value("${limit.minute}")
 	private int limitMinute;
 	
-	@Value("${limitDistance}")
+	@Value("${limit.distance}")
 	private int limitDistance;
 
 	public String getUser() {
@@ -138,6 +141,14 @@ public class UserProperties {
 
 	public void setFinalDirectory(String finalDirectory) {
 		this.finalDirectory = finalDirectory;
+	}
+
+	public String getJsonDirectory() {
+		return jsonDirectory;
+	}
+
+	public void setJsonDirectory(String jsonDirectory) {
+		this.jsonDirectory = jsonDirectory;
 	}
 
 }

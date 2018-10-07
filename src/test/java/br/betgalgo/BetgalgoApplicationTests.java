@@ -61,15 +61,15 @@ public class BetgalgoApplicationTests {
 
 		driver = new ChromeDriver();
 
-		driver.get(env.getProperty("app.site"));
+		driver.get(env.getProperty("site.login"));
 
 		WebElement inputUser = driver.findElement(By.name("username"));
 
-		inputUser.sendKeys(env.getProperty("app.user"));
+		inputUser.sendKeys(env.getProperty("site.user"));
 
 		WebElement inputPass = driver.findElement(By.name("password"));
 
-		inputPass.sendKeys(env.getProperty("app.pass"));
+		inputPass.sendKeys(env.getProperty("site.pass"));
 
 		WebElement button = driver.findElement(By.cssSelector("button[type='submit'"));
 
@@ -82,7 +82,7 @@ public class BetgalgoApplicationTests {
 		List<WebElement> links = driver.findElements(By.className("link-race"));
 		List<String> listRaceId = new ArrayList<String>();
 
-		String siteRace = env.getProperty("app.site.race");
+		String siteRace = env.getProperty("site.race");
 
 		for (WebElement webElement : links) {
 			listRaceId.add(webElement.getAttribute("data-race-id"));
