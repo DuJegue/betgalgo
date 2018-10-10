@@ -2,7 +2,7 @@ package br.betgalgo.commons.util;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Optional;
 
 import br.betgalgo.commons.pojo.DogAb;
 import br.betgalgo.commons.pojo.Race;
@@ -29,12 +29,15 @@ public abstract class Rules {
 			listDogs.add(raceDetalhe.getDogs().getDog5());
 			listDogs.add(raceDetalhe.getDogs().getDog6());
 
-			listSelected.addAll(listDogs.stream()
+			 Optional<String> op = listDogs.stream()
 				.filter(RulesPredicate.isNotNull())
 				.filter(RulesPredicate.isChanceOfWinValid())
 				.filter(RulesPredicate.isOverallValid())
 				.filter(RulesPredicate.isPreviewValid())
-				.map(DogAb::getName).collect(Collectors.toList()));
+				.map(DogAb::getName)
+				.findFirst();
+			 
+			 listSelected.add(op.get());
 		});
 		
 

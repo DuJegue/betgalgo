@@ -51,14 +51,8 @@ public class ExtractRacesController extends ConfigProperties {
 		});
 
 		List<String> listSelected = Rules.applyRules(listRace);
-		
 		createFile(listSelected);
-		
-		sendEmail();
-		
-		System.out.println("------------------------------------");
-		System.out.println("Total of Races: " + listRace.size());
-		System.out.println("Selected: " + listSelected.size());
+		sendEmail(listSelected);
 		return listRace;
 	}
 
@@ -73,7 +67,7 @@ public class ExtractRacesController extends ConfigProperties {
 		Files.write(Paths.get(nomeArquivo), listGalgos.toString().getBytes());
 	}
 
-	private void sendEmail() {
-
+	private void sendEmail(List<String> listSelected) {
+		
 	}
 }
