@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import br.betgalgo.commons.pojo.Race;
 import br.betgalgo.commons.util.UserProperties;
 
-public class RacePredicate {
+public abstract class RacePredicate {
 	
 	@Autowired
 	private static UserProperties userProperties;

@@ -29,18 +29,17 @@ public abstract class Rules {
 			listDogs.add(raceDetalhe.getDogs().getDog5());
 			listDogs.add(raceDetalhe.getDogs().getDog6());
 
-			 Optional<String> op = listDogs.stream()
-				.filter(RulesPredicate.isNotNull())
-				.filter(RulesPredicate.isChanceOfWinValid())
-				.filter(RulesPredicate.isOverallValid())
-				.filter(RulesPredicate.isPreviewValid())
-				.map(DogAb::getName)
-				.findFirst();
-			 
-			 listSelected.add(op.get());
+			listSelected.add(listDogs.stream()
+								.filter(RulesPredicate.isNotNull())
+								.filter(RulesPredicate.isChanceOfWinValid())
+								.filter(RulesPredicate.isOverallValid())
+								.filter(RulesPredicate.isPreviewValid())
+								.map(DogAb::getName)
+								.findFirst().get());
 		});
 		
 
 		return listSelected;
 	}
+
 }

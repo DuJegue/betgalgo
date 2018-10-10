@@ -60,7 +60,8 @@ public class ExtractRacesController extends ConfigProperties {
 	private void createFile(List<String> listGalgos) throws IOException {
 		LocalDate hoje = LocalDate.now();
 		StringBuilder sb = new StringBuilder();
-		listGalgos.forEach(sb::append);
+		
+		listGalgos.forEach(sb::append); //TODO
 		
 		String nomeArquivo = getUserProperties().getFinalDirectory().concat(String.valueOf(hoje.getDayOfMonth()))
 				.concat(".txt");
