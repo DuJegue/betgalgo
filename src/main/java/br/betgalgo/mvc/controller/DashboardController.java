@@ -57,7 +57,8 @@ public class DashboardController {
 
 		try {
 
-			Stream<Path> listFile = Files.list(Paths.get(".")).filter(f -> f.getFileName().toString().endsWith(".json"));
+			Stream<Path> listFile = Files.list(Paths.get(userProperties.getJsonDirectory()))
+					.filter(f -> f.getFileName().toString().endsWith(".json"));
 
 			List<Race> listRace = new ArrayList<>();
 

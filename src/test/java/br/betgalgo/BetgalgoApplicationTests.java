@@ -3,6 +3,7 @@ package br.betgalgo;
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.junit.Assert.assertThat;
 
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -47,17 +48,21 @@ public class BetgalgoApplicationTests {
 
 	@Autowired
 	private Environment env;
+	
+	String directoryJson;
 
 	@Before
 	public void init() {
 
 		mapRace = new HashMap<>();
-
+		
+		directoryJson = env.getProperty("directory.json");
+		
+		deleteFiles();
+		
 		gson = new GsonBuilder().registerTypeAdapter(Analysis.class, new AnalysisAdapter())
-		         				.registerTypeAdapter(Analysis2.class, new Analysis2Adapter())
-		         				.registerTypeAdapter(IntegerCustom.class, new IntegerCustomTypeAdapter())
-		         				.setPrettyPrinting()
-		         				.create();
+				.registerTypeAdapter(Analysis2.class, new Analysis2Adapter())
+				.registerTypeAdapter(IntegerCustom.class, new IntegerCustomTypeAdapter()).setPrettyPrinting().create();
 
 		driver = new ChromeDriver();
 
@@ -76,6 +81,18 @@ public class BetgalgoApplicationTests {
 		button.click();
 	}
 
+	private void deleteFiles() {
+
+		try {
+			Files.list(Paths.get(directoryJson)).forEach(file -> {
+				try { Files.deleteIfExists(file); } catch (IOException e) { e.printStackTrace(); }
+			});
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+	}
+
 	@Test
 	public void testAccess() {
 
@@ -89,26 +106,26 @@ public class BetgalgoApplicationTests {
 		}
 
 		for (String raceId : listRaceId) {
-            
+
 			driver.get(siteRace + raceId);
-			
+
 			try {
-			
-				Thread.sleep(2000);
-			
+
+				Thread.sleep(1500);
+
 				String json = driver.findElement(By.tagName("body")).getText();
 
 				Race race = gson.fromJson(json, Race.class);
 
 				mapRace.put(raceId, race);
-	        
-	            Files.write(Paths.get(raceId + ".json"), json.getBytes());
+
+				Files.write(Paths.get(directoryJson + raceId + ".json"), json.getBytes());
 
 			} catch (Exception e) {
-	            e.printStackTrace();
-	        }
+				e.printStackTrace();
+			}
 		}
-		
+
 		assertThat("success", containsString("success"));
 	}
 }
