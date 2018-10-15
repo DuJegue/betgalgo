@@ -21,35 +21,29 @@ public class Schedule {
 	private final long HORA = MINUTO * 60;
 
 	@Scheduled(fixedDelay = HORA)
-	//@Scheduled(cron = "0 0 1 * * ")
+	// @Scheduled(cron = "0 0 1 * * ")
 	public void teste() {
 
-		executeMavenTest();
-
 		try {
+			System.out.println(executeMavenTest());
 			controller.extract();
-		} catch (IOException e) {
+		} catch (IOException | InterruptedException e) {
 			e.printStackTrace();
 		}
 	}
 
-	private String executeMavenTest() {
+	private String executeMavenTest() throws IOException, InterruptedException {
 
 		StringBuffer output = new StringBuffer();
 
 		Process p;
-		try {
-			p = Runtime.getRuntime().exec(controller.getUserProperties().getCommand());
-			p.waitFor();
-			BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
+		p = Runtime.getRuntime().exec(controller.getUserProperties().getCommand());
+		p.waitFor();
+		BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
 
-			String line = "";
-			while ((line = reader.readLine()) != null) {
-				output.append(line + "\n");
-			}
-
-		} catch (Exception e) {
-			e.printStackTrace();
+		String line = "";
+		while ((line = reader.readLine()) != null) {
+			output.append(line + "\n");
 		}
 
 		return output.toString();
