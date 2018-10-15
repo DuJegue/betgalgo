@@ -56,19 +56,20 @@ public class ExtractRacesController extends ConfigProperties {
 		return listRace;
 	}
 
-
 	private void createFile(List<String> listGalgos) throws IOException {
 		LocalDate hoje = LocalDate.now();
 		StringBuilder sb = new StringBuilder();
-		
-		listGalgos.forEach(sb::append); //TODO
-		
+
+		listGalgos.forEach(s -> {
+			sb.append(s).append(" /n");
+		});
+
 		String nomeArquivo = getUserProperties().getFinalDirectory().concat(String.valueOf(hoje.getDayOfMonth()))
 				.concat(".txt");
 		Files.write(Paths.get(nomeArquivo), listGalgos.toString().getBytes());
 	}
 
 	private void sendEmail(List<String> listSelected) {
-		
+
 	}
 }

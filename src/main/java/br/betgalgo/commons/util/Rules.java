@@ -2,7 +2,6 @@ package br.betgalgo.commons.util;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import br.betgalgo.commons.pojo.DogAb;
 import br.betgalgo.commons.pojo.Race;

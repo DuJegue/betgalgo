@@ -46,6 +46,16 @@ public class UserProperties {
 	
 	@Value("${limit.distance}")
 	private int limitDistance;
+	
+	private String command;
+
+	public String getCommand() {
+		return command;
+	}
+
+	public void setCommand(String command) {
+		this.command = command;
+	}
 
 	public String getUser() {
 		return user;
