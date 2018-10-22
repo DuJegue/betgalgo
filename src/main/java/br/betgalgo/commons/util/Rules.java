@@ -2,7 +2,6 @@ package br.betgalgo.commons.util;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import br.betgalgo.commons.pojo.DogAb;
 import br.betgalgo.commons.pojo.Race;
@@ -16,9 +15,9 @@ public abstract class Rules {
 
 		List<String> listSelected = new ArrayList<>();
 		listRace.stream()
-		.filter(RacePredicate.isDistanceValid())
-		.filter(RacePredicate.isValidRace())
-		.forEach(p -> {
+    		.filter(RacePredicate.isDistanceValid())
+    		.filter(RacePredicate.isValidRace())
+    		.forEach(p -> {
 			
 			RaceDetalhe raceDetalhe = p.getRaceDetalhe();
 					

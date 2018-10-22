@@ -47,7 +47,6 @@ public class ExtractRacesController extends ConfigProperties {
 			} catch (JsonSyntaxException | JsonIOException | FileNotFoundException e) {
 				e.printStackTrace();
 			}
-
 		});
 
 		List<String> listSelected = Rules.applyRules(listRace);
@@ -61,7 +60,9 @@ public class ExtractRacesController extends ConfigProperties {
 		LocalDate hoje = LocalDate.now();
 		StringBuilder sb = new StringBuilder();
 		
-		listGalgos.forEach(sb::append); //TODO
+		listGalgos.forEach(p -> {
+		    sb.append(p).append(" \n");
+		});
 		
 		String nomeArquivo = getUserProperties().getFinalDirectory().concat(String.valueOf(hoje.getDayOfMonth()))
 				.concat(".txt");
