@@ -55,11 +55,9 @@ public class ExtractRacesController extends ConfigProperties {
 		return listRace;
 	}
 
-
 	private void createFile(List<String> listGalgos) throws IOException {
 		LocalDate hoje = LocalDate.now();
 		StringBuilder sb = new StringBuilder();
-		
 		listGalgos.forEach(p -> {
 		    sb.append(p).append(" \n");
 		});
@@ -70,6 +68,6 @@ public class ExtractRacesController extends ConfigProperties {
 	}
 
 	private void sendEmail(List<String> listSelected) {
-		
+
 	}
 }
