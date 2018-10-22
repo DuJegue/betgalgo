@@ -1,14 +1,18 @@
 package br.betgalgo.commons.util;
 
+import java.io.Serializable;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
 @Component
 @PropertySource("classpath:user.properties")
-public class UserProperties {
+public class UserProperties implements Serializable {
 
-	@Value("${site.user}")
+	private static final long serialVersionUID = -4204371516957246705L;
+
+    @Value("${site.user}")
 	private String user;
 
 	@Value("${site.pass}")
@@ -47,6 +51,7 @@ public class UserProperties {
 	@Value("${limit.distance}")
 	private int limitDistance;
 	
+	@Value("${mvn.command}")
 	private String command;
 
 	public String getCommand() {

@@ -6,7 +6,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
-@ComponentScan(basePackages = {"br.betgalgo.mvc.controller","br.betgalgo.commons.util"})
+@ComponentScan(basePackages = {"br.betgalgo.mvc.controller","br.betgalgo.commons.util", "br.betgalgo.schedule"})
 @EnableScheduling
 public class BetgalgoApplication {
 

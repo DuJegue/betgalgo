@@ -20,7 +20,7 @@ public class Schedule {
 	private final long MINUTO = SEGUNDO * 60;
 	private final long HORA = MINUTO * 60;
 
-	@Scheduled(fixedDelay = HORA)
+	@Scheduled(fixedDelay = MINUTO)
 	// @Scheduled(cron = "0 0 1 * * ")
 	public void teste() {
 
@@ -36,9 +36,8 @@ public class Schedule {
 
 		StringBuffer output = new StringBuffer();
 
-		Process p;
-		p = Runtime.getRuntime().exec(controller.getUserProperties().getCommand());
-		p.waitFor();
+		Process p = Runtime.getRuntime().exec(controller.getUserProperties().getCommand());
+		p. waitFor();
 		BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
 
 		String line = "";
