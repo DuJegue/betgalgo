@@ -29,27 +29,26 @@ public class Schedule {
     public void teste() {
 
         try {
-            System.out.println(executeMavenTest());
+            executeMavenTest();
             controller.extract();
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }
     }
 
-    private String executeMavenTest() throws IOException, InterruptedException {
+    private void executeMavenTest() throws IOException, InterruptedException {
 
         StringBuffer output = new StringBuffer();
 
-        Process p = Runtime.getRuntime().exec(userProperties.getCommand());
-        p.waitFor();
+        ProcessBuilder builder = new ProcessBuilder("cmd.exe", "/c", userProperties.getCommand());
+        builder.redirectErrorStream(true);
+        Process p = builder.start();
         BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
 
         String line = "";
         while ((line = reader.readLine()) != null) {
             output.append(line + "\n");
         }
-
-        return output.toString();
-
+        System.out.println(output.toString());
     }
 }
