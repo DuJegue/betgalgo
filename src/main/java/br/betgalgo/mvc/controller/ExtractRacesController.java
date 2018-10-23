@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.google.gson.Gson;
@@ -24,13 +25,19 @@ import br.betgalgo.commons.pojo.Analysis2;
 import br.betgalgo.commons.pojo.Race;
 import br.betgalgo.commons.util.Analysis2Adapter;
 import br.betgalgo.commons.util.AnalysisAdapter;
-import br.betgalgo.commons.util.ConfigProperties;
 import br.betgalgo.commons.util.IntegerCustom;
 import br.betgalgo.commons.util.IntegerCustomTypeAdapter;
 import br.betgalgo.commons.util.Rules;
+import br.betgalgo.commons.util.UserProperties;
 
 @Component
-public class ExtractRacesController extends ConfigProperties {
+public class ExtractRacesController {
+    
+    @Autowired
+    private UserProperties userProperties;
+    
+    @Autowired
+    private EmailController emailController;
 
 	public List<Race> extract() throws IOException {
 		List<Race> listRace = new ArrayList<>();
@@ -50,24 +57,26 @@ public class ExtractRacesController extends ConfigProperties {
 		});
 
 		List<String> listSelected = Rules.applyRules(listRace);
-		createFile(listSelected);
-		sendEmail(listSelected);
+		StringBuilder galgos = createFile(listSelected);
+		sendEmail(galgos);
 		return listRace;
 	}
 
-	private void createFile(List<String> listGalgos) throws IOException {
+	private StringBuilder createFile(List<String> listGalgos) throws IOException {
 		LocalDate hoje = LocalDate.now();
 		StringBuilder sb = new StringBuilder();
 		listGalgos.forEach(p -> {
 		    sb.append(p).append(" \n");
 		});
 		
-		String nomeArquivo = getUserProperties().getFinalDirectory().concat(String.valueOf(hoje.getDayOfMonth()))
+		String nomeArquivo = userProperties.getFinalDirectory().concat(String.valueOf(hoje.getDayOfMonth()))
 				.concat(".txt");
 		Files.write(Paths.get(nomeArquivo), listGalgos.toString().getBytes());
+		
+		return sb;
 	}
 
-	private void sendEmail(List<String> listSelected) {
-
+	private void sendEmail(StringBuilder listSelected) {
+	    emailController.send(listSelected);
 	}
 }

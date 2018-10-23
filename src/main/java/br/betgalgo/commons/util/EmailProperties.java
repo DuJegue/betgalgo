@@ -24,6 +24,45 @@ public class EmailProperties implements Serializable {
     @Value("${email.subject}")
     private String subject;
 
+    @Value("${email.destiny}")
+    private String destiny;
+
+    @Value("${email.origin}")
+    private String origin;
+
+    @Value("${email.port}")
+    private String port;
+
+    /** @return Retorna port */
+    public String getPort() {
+        return port;
+    }
+
+    /** @param port Define port */
+    public void setPort(String port) {
+        this.port = port;
+    }
+
+    /** @return Retorna destiny */
+    public String getDestiny() {
+        return destiny;
+    }
+
+    /** @param destiny Define destiny */
+    public void setDestiny(String destiny) {
+        this.destiny = destiny;
+    }
+
+    /** @return Retorna origin */
+    public String getOrigin() {
+        return origin;
+    }
+
+    /** @param origin Define origin */
+    public void setOrigin(String origin) {
+        this.origin = origin;
+    }
+
     /** @return Retorna user */
     public String getUser() {
         return user;

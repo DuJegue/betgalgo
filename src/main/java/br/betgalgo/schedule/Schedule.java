@@ -8,44 +8,48 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import br.betgalgo.commons.util.UserProperties;
 import br.betgalgo.mvc.controller.ExtractRacesController;
 
 @Component
 public class Schedule {
 
-	@Autowired
-	private ExtractRacesController controller;
+    @Autowired
+    private ExtractRacesController controller;
 
-	private final long SEGUNDO = 1000;
-	private final long MINUTO = SEGUNDO * 60;
-	private final long HORA = MINUTO * 60;
+    @Autowired
+    private UserProperties userProperties;
 
-	@Scheduled(fixedDelay = MINUTO)
-	// @Scheduled(cron = "0 0 1 * * ")
-	public void teste() {
+    private final long SEGUNDO = 1000;
+    private final long MINUTO = SEGUNDO * 60;
+    private final long HORA = MINUTO * 60;
 
-		try {
-			System.out.println(executeMavenTest());
-			controller.extract();
-		} catch (IOException | InterruptedException e) {
-			e.printStackTrace();
-		}
-	}
+    @Scheduled(fixedDelay = MINUTO)
+    // @Scheduled(cron = "0 0 1 * * ")
+    public void teste() {
 
-	private String executeMavenTest() throws IOException, InterruptedException {
+        try {
+            System.out.println(executeMavenTest());
+            controller.extract();
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 
-		StringBuffer output = new StringBuffer();
+    private String executeMavenTest() throws IOException, InterruptedException {
 
-		Process p = Runtime.getRuntime().exec(controller.getUserProperties().getCommand());
-		p. waitFor();
-		BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
+        StringBuffer output = new StringBuffer();
 
-		String line = "";
-		while ((line = reader.readLine()) != null) {
-			output.append(line + "\n");
-		}
+        Process p = Runtime.getRuntime().exec(userProperties.getCommand());
+        p.waitFor();
+        BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
 
-		return output.toString();
+        String line = "";
+        while ((line = reader.readLine()) != null) {
+            output.append(line + "\n");
+        }
 
-	}
+        return output.toString();
+
+    }
 }
