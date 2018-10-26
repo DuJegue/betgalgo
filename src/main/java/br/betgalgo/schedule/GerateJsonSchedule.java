@@ -12,7 +12,7 @@ import br.betgalgo.commons.util.UserProperties;
 import br.betgalgo.mvc.controller.ExtractRacesController;
 
 @Component
-public class Schedule {
+public class GerateJsonSchedule {
 
     @Autowired
     private ExtractRacesController controller;
